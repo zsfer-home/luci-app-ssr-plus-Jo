@@ -658,6 +658,17 @@ msgstr "无法访问"
 msgid "Connection Timeout"
 msgstr "连接超时"
 
+msgid "SOCKS5 Proxy Server Settings"
+msgstr "SOCKS5 代理服务端设置"
+
+msgid "Enable SOCKS5 Proxy Server"
+msgstr "启用 SOCKS5 代理服务"
+
+msgid "Enable Authentication"
+msgstr "启用 用户名/密码 认证"
+
+msgid "SOCKS5 Proxy Server"
+msgstr "SOCKS5 代理服务端"
 
 msgid "Game Mode"
 msgstr "游戏模式"

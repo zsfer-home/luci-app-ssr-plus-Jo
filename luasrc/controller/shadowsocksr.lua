@@ -77,7 +77,7 @@ function act_status()
 		e.chinadns= true
     end
      --检测SOCKS5状态
-	if tonumber(luci.sys.exec("ps -w | grep srelay |grep -v grep| wc -l"))>0 then
+	if tonumber(luci.sys.exec("ps -w | grep microsocks |grep -v grep| wc -l"))>0 then
 		e.SOCKS5= true
 	  end
 
