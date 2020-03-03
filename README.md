@@ -35,7 +35,7 @@ theme : https://github.com/Leo-Jo-My/luci-theme-Butterfly
 ```Brach
     #下载源码
     
-    git clone -b lean  https://github.com/Leo-Jo-My/luci-app-ssr-plus-Jo package/luci-app-ssr-plus-Jo
+    git clone -b lean  https://github.com/Leo-Jo-My/luci-app-ssr-plus-Jo package/luci-app-ssr-plus-lean
  
  
     make menuconfig
