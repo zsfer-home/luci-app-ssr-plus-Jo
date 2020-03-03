@@ -637,8 +637,14 @@ msgstr "应用"
 msgid "total"
 msgstr "总计"
 
+msgid "Node list"
+msgstr "节点列表"
+
 msgid "Nodes"
 msgstr "个节点"
+
+msgid "Ping All Servers"
+msgstr "PING 所有节点"
 
 msgid "foreign websites"
 msgstr "国外网站"
