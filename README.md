@@ -19,7 +19,7 @@ Lean's luci-app-ssr-plus source (history):
    源码来源：https://github.com/coolsnowwolf
 
  
-## 此为原版ssr-plus修改服务器列表为图标切换加入图标检测功能
+## 此为原版ssr-plus修改服务器列表为图标切换/图标检测功能/V2ray分流
 
 #### My other project
       
