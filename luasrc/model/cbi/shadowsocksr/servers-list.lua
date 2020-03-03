@@ -21,6 +21,7 @@ s = m:section(TypedSection, "servers")
 s.anonymous = true
 s.addremove = true
 s.sortable = false
+s.description = string.format(translate("Server Count") ..  ": %d", server_count)
 s.template = "cbi/tblsection"
 s.sortable = true
 s.extedit = luci.dispatcher.build_url("admin/services/shadowsocksr/servers/%s")
