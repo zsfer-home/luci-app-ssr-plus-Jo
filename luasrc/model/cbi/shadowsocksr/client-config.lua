@@ -4,20 +4,19 @@
 local m, s, o,kcp_enable
 local shadowsocksr = "shadowsocksr"
 local uci = luci.model.uci.cursor()
-local ipkg = require("luci.model.ipkg")
 local fs = require "nixio.fs"
 local sys = require "luci.sys"
 local sid = arg[1]
 local uuid = luci.sys.exec("cat /proc/sys/kernel/random/uuid")
-
+local http  = require "luci.http"
 
 local function isKcptun(file)
-    if not fs.access(file, "rwx", "rx", "rx") then
-        fs.chmod(file, 755)
-    end
+	if not fs.access(file, "rwx", "rx", "rx") then
+		fs.chmod(file, 755)
+	end
 
-    local str = sys.exec(file .. " -v | awk '{printf $1}'")
-    return (str:lower() == "kcptun")
+	local str = sys.exec(file .. " -v | awk '{printf $1}'")
+	return (str:lower() == "kcptun")
 end
 
 
@@ -33,7 +32,7 @@ local encrypt_methods = {
 	"aes-256-cfb",
 	"aes-128-ctr",
 	"aes-192-ctr",
-	"aes-256-ctr",	
+	"aes-256-ctr",
 	"bf-cfb",
 	"camellia-128-cfb",
 	"camellia-192-cfb",
@@ -88,7 +87,7 @@ local protocol = {
 	"auth_chain_f",
 }
 
-local obfs = {
+obfs = {
 	"plain",
 	"http_simple",
 	"http_post",
@@ -97,17 +96,17 @@ local obfs = {
 }
 
 local securitys = {
-    "auto",
-    "none",
-    "aes-128-gcm",
-    "chacha20-poly1305"
+	"auto",
+	"none",
+	"aes-128-gcm",
+	"chacha20-poly1305"
 }
 
 
 m = Map(shadowsocksr, translate("Edit ShadowSocksR Server"))
-m.redirect = luci.dispatcher.build_url("admin/vpn/shadowsocksr/servers")
+m.redirect = luci.dispatcher.build_url("admin/services/shadowsocksr/servers")
 if m.uci:get(shadowsocksr, sid) ~= "servers" then
-	luci.http.redirect(m.redirect) 
+	luci.http.redirect(m.redirect)
 	return
 end
 
@@ -116,29 +115,26 @@ s = m:section(NamedSection, sid, "servers")
 s.anonymous = true
 s.addremove   = false
 
-o = s:option(DummyValue,"ssr_url","SS/SSR/V2RAY/TROJAN URL") 
+o = s:option(DummyValue,"ssr_url","SS/SSR/V2RAY/TROJAN URL")
 o.rawhtml  = true
 o.template = "shadowsocksr/ssrurl"
 o.value =sid
 
-
 o = s:option(ListValue, "type", translate("Server Node Type"))
+o:value("ssr", translate("ShadowsocksR"))
+if nixio.fs.access("/usr/bin/ss-redir") then
+o:value("ss", translate("Shadowsocks New Version"))
+end
+if nixio.fs.access("/usr/bin/v2ray/v2ray") or nixio.fs.access("/usr/bin/v2ray") then
+o:value("v2ray", translate("V2Ray"))
+end
 if nixio.fs.access("/usr/sbin/trojan") then
 o:value("trojan", translate("Trojan"))
 end
-
-if nixio.fs.access("/usr/bin/v2ray/v2ray") then
-o:value("v2ray", translate("V2Ray"))
-end
-o:value("ssr", translate("ShadowsocksR"))
-if nixio.fs.access("/usr/bin/ss-redir") then
-o:value("ss", translate("Shadowsocks"))
+if nixio.fs.access("/usr/bin/ipt2socks") then
+o:value("socks5", translate("Socks5"))
 end
 o.description = translate("Using incorrect encryption mothod may causes service fail to start")
-
-upload_conf = s:option(FileUpload, "")	
-upload_conf.template = "cbi/other_upload2"	
-upload_conf:depends("use_conf_file", 1)	
 
 o = s:option(Value, "alias", translate("Alias(optional)"))
 
@@ -155,10 +151,9 @@ o.rmempty = false
 -- o.default = 60
 -- o.rmempty = false
 
-o = s:option(Value, "weight", translate("Weight"))
-o.datatype = "uinteger"
-o.default = 10
-o.rmempty = false
+o = s:option(Value, "username", translate("Username"))
+o.rmempty = true
+o:depends("type", "socks5")
 
 o = s:option(Value, "password", translate("Password"))
 o.password = true
@@ -166,8 +161,7 @@ o.rmempty = true
 o:depends("type", "ssr")
 o:depends("type", "ss")
 o:depends("type", "trojan")
-
-
+o:depends("type", "socks5")
 
 o = s:option(ListValue, "encrypt_method", translate("Encrypt Method"))
 for _, v in ipairs(encrypt_methods) do o:value(v) end
@@ -179,27 +173,14 @@ for _, v in ipairs(encrypt_methods_ss) do o:value(v) end
 o.rmempty = true
 o:depends("type", "ss")
 
-o = s:option(ListValue, "plugin", translate("plugin"))
-o:value("none", "None")
-if nixio.fs.access("/usr/bin/v2ray-plugin") then
-o:value("/usr/bin/v2ray-plugin", "v2ray-plugin")
-end
-if nixio.fs.access("/usr/bin/obfs-local") then
-o:value("/usr/bin/obfs-local", "obfs-local")
-end
-if nixio.fs.access("/usr/bin/goquiet-client") then
-o:value("/usr/bin/goquiet-client", "GoQuiet")
-end
-o.rmempty = false
-o.default = "none"
+-- Shadowsocks Plugin
+o = s:option(Value, "plugin", translate("Plugin"))
+o.rmempty = true
 o:depends("type", "ss")
 
 o = s:option(Value, "plugin_opts", translate("Plugin Opts"))
 o.rmempty = true
-o:depends("plugin", "/usr/bin/v2ray-plugin")
-o:depends("plugin", "/usr/bin/obfs-local")
-o:depends("plugin", "/usr/bin/goquiet-client")
-
+o:depends("type", "ss")
 
 o = s:option(ListValue, "protocol", translate("Protocol"))
 for _, v in ipairs(protocol) do o:value(v) end
@@ -219,7 +200,8 @@ o:depends("type", "ssr")
 
 -- AlterId
 o = s:option(Value, "alter_id", translate("AlterId"))
-o.default = 100
+o.datatype = "port"
+o.default = 16
 o.rmempty = true
 o:depends("type", "v2ray")
 
@@ -247,23 +229,22 @@ o:depends("type", "v2ray")
 
 -- [[ TCP部分 ]]--
 
--- TCP伪装
+-- TCP伪装
 o = s:option(ListValue, "tcp_guise", translate("Camouflage Type"))
 o:depends("transport", "tcp")
-o:value("none", translate("None"))
 o:value("http", "HTTP")
+o:value("none", translate("None"))
 o.rmempty = true
 
 -- HTTP域名
-o = s:option(DynamicList, "http_host", translate("HTTP Host"))
+o = s:option(Value, "http_host", translate("HTTP Host"))
 o:depends("tcp_guise", "http")
 o.rmempty = true
 
 -- HTTP路径
-o = s:option(DynamicList, "http_path", translate("HTTP Path"))
+o = s:option(Value, "http_path", translate("HTTP Path"))
 o:depends("tcp_guise", "http")
 o.rmempty = true
-
 
 -- [[ WS部分 ]]--
 
@@ -280,7 +261,7 @@ o.rmempty = true
 -- [[ H2部分 ]]--
 
 -- H2域名
-o = s:option(DynamicList, "h2_host", translate("HTTP/2 Host"))
+o = s:option(Value, "h2_host", translate("HTTP/2 Host"))
 o:depends("transport", "h2")
 o.rmempty = true
 
@@ -288,7 +269,6 @@ o.rmempty = true
 o = s:option(Value, "h2_path", translate("HTTP/2 Path"))
 o:depends("transport", "h2")
 o.rmempty = true
-
 
 -- [[ QUIC部分 ]]--
 
@@ -340,7 +320,7 @@ o.rmempty = true
 o = s:option(Value, "uplink_capacity", translate("Uplink Capacity"))
 o.datatype = "uinteger"
 o:depends("transport", "kcp")
-o.default = 50
+o.default = 5
 o.rmempty = true
 
 o = s:option(Value, "downlink_capacity", translate("Downlink Capacity"))
@@ -370,6 +350,7 @@ o = s:option(Flag, "insecure", translate("allowInsecure"))
 o.rmempty = true
 o:depends("type", "v2ray")
 o:depends("type", "trojan")
+o.default = "1"
 
 -- [[ TLS ]]--
 o = s:option(Flag, "tls", translate("TLS"))
@@ -377,6 +358,11 @@ o.rmempty = true
 o.default = "0"
 o:depends("type", "v2ray")
 o:depends("type", "trojan")
+
+o = s:option(Value, "tls_host", translate("TLS Host"))
+--o:depends("type", "trojan")
+o:depends("tls", "1")
+o.rmempty = true
 
 -- [[ Mux ]]--
 o = s:option(Flag, "mux", translate("Mux"))
@@ -389,6 +375,54 @@ o.datatype = "uinteger"
 o.rmempty = true
 o.default = "8"
 o:depends("mux", "1")
+
+-- [[ Cert ]]--
+o = s:option(Flag, "certificate", translate("Self-signed Certificate"))
+o.rmempty = true
+o.default = "0"
+o:depends("type", "trojan")
+o:depends("type", "v2ray")
+o.description = translate("If you have a self-signed certificate,please check the box")
+
+o = s:option(DummyValue, "upload", translate("Upload"))
+o.template = "shadowsocksr/certupload"
+o:depends("certificate", 1)
+
+cert_dir = "/etc/ssl/private/"
+local path
+
+http.setfilehandler(
+    function(meta, chunk, eof)
+      if not fd then
+        if (not meta) or (not meta.name) or (not meta.file) then return end
+           fd = nixio.open(cert_dir .. meta.file, "w")
+        if not fd then
+           path = translate("Create upload file error.")
+        return
+        end
+     end
+     if chunk and fd then
+     fd:write(chunk)
+     end
+     if eof and fd then
+       fd:close()
+       fd = nil
+       path = '/etc/ssl/private/' .. meta.file .. ''
+    end
+    end
+    )
+if luci.http.formvalue("upload") then
+   local f = luci.http.formvalue("ulfile")
+    if #f <= 0 then
+        path = translate("No specify upload file.")
+   end   
+end
+
+o = s:option(Value, "certpath", translate("Current Certificate Path"))
+o:depends("certificate", 1)
+o:value("/etc/ssl/private/")
+o.description = translate("Please confirm the current certificate path")
+o.default = "/etc/ssl/private/"
 
 o = s:option(Flag, "fast_open", translate("TCP Fast Open"))
 o.rmempty = true
@@ -421,14 +455,14 @@ function o.validate(self, value, section)
 		local kcp_file="/usr/bin/kcptun-client"
 		local enable = kcp_enable:formvalue(section) or kcp_enable.disabled
 		if enable == kcp_enable.enabled then
-    if not fs.access(kcp_file)  then
-        return nil, translate("Haven't a Kcptun executable file")
-    elseif  not isKcptun(kcp_file) then
-        return nil, translate("Not a Kcptun executable file")    
-    end
-    end
+	if not fs.access(kcp_file)  then
+		return nil, translate("Haven't a Kcptun executable file")
+	elseif  not isKcptun(kcp_file) then
+		return nil, translate("Not a Kcptun executable file")
+	end
+	end
 
-    return value
+	return value
 end
 o:depends("type", "ssr")
 o:depends("type", "ss")
@@ -446,4 +480,3 @@ o:depends("type", "ss")
 end
 
 return m
-

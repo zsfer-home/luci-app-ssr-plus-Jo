@@ -1,6 +1,8 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
+msgid "ShadowSocksR Client"
+msgstr "ShadowSocksR 客户端"
 
 msgid "Enable"
 msgstr "启用"
@@ -8,144 +10,8 @@ msgstr "启用"
 msgid "Disable"
 msgstr "停用"
 
-msgid "Enable Servers"
-msgstr "开启服务"
-
-
-msgid "Open v2ray split-flow"
-msgstr "开启V2ray分流"
-
-msgid "When open v2ray split-flow,your main server must be a v2ray server"
-msgstr "当使用v2ray分流功能时 主服务器必须为V2ray"
-
-msgid "Youtube Proxy"
-msgstr "Youtube 代理"
-
-msgid "TaiWan Video Proxy"
-msgstr "台湾视频服务代理"
-
-msgid "Netflix Proxy"
-msgstr "Netflix 代理"
-
-msgid "Diseny+ Proxy"
-msgstr "Diseny+ 代理"
-
-msgid "Prime Video Proxy"
-msgstr "Prime Video 代理"
-
-msgid "adblock settings"
-msgstr "广告屏蔽设置"
-
-msgid "Enable adblock"
-msgstr "开启广告屏蔽"
-
-msgid "adblock_url"
-msgstr "广告屏蔽订阅"
-
-msgid "Socks user"
-msgstr "用户名"
-
-msgid "Socks pass"
-msgstr "密码"
-
-msgid "Ping All Servers"
-msgstr "PING 所有节点"
-
-msgid "Ping Latency"
-msgstr "Ping 延迟"
-
-
-
-msgid "SSR SOCKS5 Proxy"
-msgstr "SSR SOCKS5代理"
-
-msgid "Subscription"
-msgstr "订阅管理"
-
-
-
-msgid "Subscribing,Please do not refresh!"
-msgstr "订阅，请不要刷新!"
-
-msgid "Check Try Count"
-msgstr "切换检查重试次数"
-
 msgid "Log"
 msgstr "日志"
-
-msgid "Bypass Domain List"
-msgstr "不走代理的域名"
-
-msgid "Black Domain List"
-msgstr "强制走代理的域名"
-
-msgid "Node List"
-msgstr "节点列表"
-
-msgid "END SUBSCRIBE"
-msgstr "结束订阅"
-
-msgid "Update Setting"
-msgstr "更新设置"
-
-
-msgid "AlterId"
-msgstr "额外ID"
-
-msgid "Save And Start Subscribe"
-msgstr "保存并开始订阅"
-
-
-msgid "VmessId (UUID)"
-msgstr "用户ID(UUID)"
-
-msgid "Transport"
-msgstr "传输方式"
-
-msgid "Configuration Url"
-msgstr "配置链接"
-
-msgid "Import Configuration"
-msgstr "导入配置信息"
-
-msgid "Apply"
-msgstr "应用"
-
-msgid "total"
-msgstr "总计"
-
-msgid "Node list"
-msgstr "节点列表"
-
-
-msgid "Nodes"
-msgstr "个节点"
-
-msgid "Client"
-msgstr "客户端"
-
-msgid "Visit foreign websites"
-msgstr "国外网站"
-
-msgid "Visit domestic website"
-msgstr "国内网站"
-
-msgid "Problem detected"
-msgstr "无法访问"
-
-msgid "Working..."
-msgstr "连接正常"
-
-
-msgid "Game Mode"
-msgstr "游戏模式"
-
-
-msgid "V2ray SOCKS5 Proxy"
-msgstr "V2ray SOCKS5代理"
-
-msgid "Edit ShadowSocksR Server"
-msgstr "编辑服务器配置"
 
 msgid "ShadowSocksR is running"
 msgstr "ShadowSocksR 客户端运行中"
@@ -181,7 +47,7 @@ msgid "Server Address"
 msgstr "服务器地址"
 
 msgid "Server Port"
-msgstr "服务器端口"
+msgstr "端口"
 
 msgid "Local Port"
 msgstr "本地端口"
@@ -252,6 +118,8 @@ msgstr "内网主机列表"
 msgid "SSR Client"
 msgstr "客户端"
 
+msgid "SSR Server"
+msgstr "服务端"
 
 msgid "ShadowSocksR Server"
 msgstr "ShadowSocksR 服务端"
@@ -298,8 +166,11 @@ msgstr "编辑服务器配置"
 msgid "Alias"
 msgstr "别名"
 
-msgid "SOCKS5 Proxy"
-msgstr "SOCKS5代理"
+msgid "SOCKS Proxy"
+msgstr "SOCKS(4/5)代理"
+
+msgid "Enable SOCKS Proxy"
+msgstr "启用 SOCKS 代理"
 
 msgid "Server"
 msgstr "服务器"
@@ -315,9 +186,6 @@ msgstr "未知"
 
 msgid "Running Status"
 msgstr "运行状态"
-
-msgid "ShadowSocksR Plus+"
-msgstr "ShadowSocksR Plus+ 魔改版"
 
 msgid "Global Client"
 msgstr "TCP透明代理"
@@ -406,7 +274,6 @@ msgstr "正在检查.."
 msgid "Proxy Check"
 msgstr "代理检查"
 
-
 msgid "GFW List Data"
 msgstr "【GFW列表】数据库"
 
@@ -440,9 +307,6 @@ msgstr "【服务器端口】检查"
 msgid "Check Connect"
 msgstr "检查连通性"
 
-msgid "Basic Settings"
-msgstr "服务器设置"
-
 msgid "Check Server"
 msgstr "检查服务器"
 
@@ -458,11 +322,29 @@ msgstr "自动切换检查周期（秒）"
 msgid "Check timout(second)"
 msgstr "切换检查超时时间（秒）"
 
+msgid "Check Try Count"
+msgstr "切换检查重试次数"
+
+msgid "Enable adblock"
+msgstr "启用广告屏蔽"
+
+msgid "adblock_url"
+msgstr "广告屏蔽订阅"
+
 msgid "Enable Process Deamon"
 msgstr "启用进程自动守护"
 
 msgid "Advertising Data"
 msgstr "【广告屏蔽】数据库"
+
+msgid "Chnroute Setting"
+msgstr "国内IP段数据库更新设置"
+
+msgid "Enable custom chnroute"
+msgstr "启用自定义更新地址"
+
+msgid "Update url"
+msgstr "更新链接"
 
 msgid "DNS Server IP and Port"
 msgstr "DNS服务器地址和端口"
@@ -516,13 +398,16 @@ msgid "GFW List"
 msgstr "GFW列表"
 
 msgid "ShadowSocksR Plus+ Settings"
-msgstr "ShadowSocksR Plus+ 设置（支持SS/SSR/V2RAY/Trojan）"
+msgstr "ShadowSocksR Plus+ 设置（支持SS/SSR/V2RAY/TROJAN）"
 
 msgid "Main Server"
 msgstr "主服务器"
 
 msgid "Anti-pollution DNS Server"
 msgstr "访问国外域名DNS服务器"
+
+msgid "Custom DNS Server format as IP:PORT (default: 8.8.4.4:53)"
+msgstr "自定义国外域名DNS服务器，格式为 IP:PORT (默认: 8.8.4.4:53)"
 
 msgid "Use Pdnsd tcp query and cache"
 msgstr "使用PDNSD TCP查询并缓存"
@@ -537,7 +422,7 @@ msgid "Auto Update Server subscription, GFW list and CHN route"
 msgstr "自动更新服务器订阅、GFW列表和 CHN路由表"
 
 msgid "Subscribe URL"
-msgstr "SS/SSR/V2RAY订阅URL地址"
+msgstr "SS/SSR/V2RAY/Trojan订阅URL地址"
 
 msgid "Update"
 msgstr "更新"
@@ -546,7 +431,7 @@ msgid "Server Count"
 msgstr "服务器节点数量"
 
 msgid "IP black-and-white list"
-msgstr "IP黑白名单"
+msgstr "黑白名单"
 
 msgid "WAN IP AC"
 msgstr "WAN IP访问控制"
@@ -585,10 +470,10 @@ msgid "Please refer to the following writing"
 msgstr "每行一个域名，无需写前面的 HTTP(S):// ，提交后即时生效"
 
 msgid "Servers subscription and manage"
-msgstr "节点订阅"
+msgstr "服务器节点订阅与管理（支持订阅和手动导入SSR链接）"
 
 msgid "Through proxy update list, Not Recommended"
-msgstr "通过路由器自身代理更新订阅（不推荐）"
+msgstr "通过路由器自身代理更新订阅"
 
 msgid "LAN IP AC"
 msgstr "LAN IP访问控制"
@@ -599,11 +484,17 @@ msgstr "游戏模式UDP中继服务器"
 msgid "Game Mode UDP Relay"
 msgstr "游戏模式UDP中继"
 
+msgid "adblock settings"
+msgstr "广告屏蔽设置"
+
 msgid "Server failsafe auto swith settings"
 msgstr "服务器节点故障自动切换设置"
 
 msgid "Delete all severs"
-msgstr "删除所有服务器"
+msgstr "删除所有服务器节点"
+
+msgid "Delete All Subscribe Severs"
+msgstr "删除所有订阅服务器节点"
 
 msgid "Severs Nodes"
 msgstr "服务器节点"
@@ -650,13 +541,6 @@ msgstr "64 线程"
 msgid "128 Threads"
 msgstr "128 线程"
 
-msgid "256 Threads"
-msgstr "256 线程"
-
-msgid "512 Threads"
-msgstr "512 线程"
-
-
 msgid "Proxy Ports"
 msgstr "需要代理的端口"
 
@@ -666,191 +550,109 @@ msgstr "所有端口（默认）"
 msgid "Only Common Ports"
 msgstr "仅常用端口（不走P2P流量到代理）"
 
-
-msgid "Use dnscrypt-proxy query and cache"
-msgstr "使用dnscrypt-proxy TCP查询并缓存"
-
-msgid "Use dnsforwarder tcp query and cache"
-msgstr "使用dnsforwarder TCP查询并缓存"
-
-msgid "Use Pdnsd udp query and cache"
-msgstr "使用Pdnsd UDP查询并缓存"
-
-
-msgid "Use dnsforwarder udp query and cache"
-msgstr "使用dnsforwarder UDP查询并缓存"
-
-msgid "Use chinadns query and cache"
-msgstr "使用ChinaDNS查询并缓存"
-
-msgid "Chiadns Resolve Dns Mode"
-msgstr "ChinaDNS的上游服务器"
-
-
-msgid "Use Local DNS Service"
-msgstr "使用设定DNS解析"
-
-msgid "Oversea GFW List Mode"
-msgstr "海外用户回国域名列表模式"
-
-msgid "Oversea IP Route Mode"
-msgstr "海外用户回国IP路由模式"
-
-msgid "Use Local DNS Service"
-msgstr "使用设定DNS解析"
-
-msgid "Using System Default DNS"
-msgstr "使用系统默认DNS"
-
-msgid "Using acceleration center DNS"
-msgstr "使用加速中心DNS"
-
-msgid "Appoint dns List"
-msgstr "指定DNS解析列表"
-
-msgid "Use https_dns_proxy query and cache"
-msgstr "使用https_dns_proxy TCP查询并缓存"
-
-msgid "Use smartdns query and cache"
-msgstr "使用SmartDNS TCP查询并缓存"
-
-msgid "Use Pcap_DNSProxy query and cache"
-msgstr "使用Pcap DNSProxy TCP查询并缓存"
-
-msgid "Kill BT"
-msgstr "禁止  BT"
-
-msgid "BT Port"
-msgstr "BT 端口"
-
-msgid "Enabling IPv6 server"
-msgstr "启用ipv6服务"
-
-msgid "Prohibit downloading tool ports through proxy"
-msgstr "禁止BT端口走代理"
-
-
-msgid "udp2raw Version"
-msgstr "udp2raw 版本"
-
-msgid "udp2raw tunnel Project"
-msgstr "udp2raw 项目"
-
-
-msgid "UDPspeeder Version"
-msgstr "UDPspeeder 版本"
-
-
-msgid "UDPspeeder Project"
-msgstr "UDPspeeder 项目"
-
-msgid "Appointlist List"
-msgstr "加速列表"
-
-msgid "udp2raw tunnel"
-msgstr "UDP隧道"
-
-msgid "Enable udp2raw"
-msgstr "启用 udp2raw"
-
-msgid "Enable UDPspeeder"
-msgstr "启用 UDPspeeder"
-
-msgid "SOCKS5 Proxy"
-msgstr "SOCKS5代理"
-
-msgid "SSOCKS5 Proxy"
-msgstr "SS SOCKS5代理"
-
-msgid "Global SS Server"
-msgstr "SS服务端"
-
-
-msgid "V2SOCKS5 Proxy"
-msgstr "V2ray SOCKS5代理"
-
-msgid "Global V2RAY Server"
-msgstr "V2RAY服务端"
-
-msgid "haProxy settings"
-msgstr "HaProxy 设置"
-
-
-msgid "Enabling the Management Console"
-msgstr "启用管理控制台"
-
-msgid "Service Port"
-msgstr "端口"
-
 msgid "Socket Connected"
 msgstr "连接测试"
 
+msgid "Ping Latency"
+msgstr "Ping延迟"
 
-msgid "Enable HTTP Proxy"
-msgstr "启用HTTP代理"
+msgid "Bypass Domain List"
+msgstr "不走代理的域名"
 
-msgid "HTTP Port"
-msgstr "HTTP代理端口"
+msgid "Black Domain List"
+msgstr "强制走代理的域名"
 
-msgid "plugin"
+msgid "Update Subscribe List"
+msgstr "更新订阅URL列表"
+
+msgid "Update subscribe url list first"
+msgstr "订阅服务器节点前，请先更新订阅URL列表"
+
+msgid "Update All Subscribe Severs"
+msgstr "更新所有订阅服务器节点"
+
+msgid "Plugin"
 msgstr "插件"
 
 msgid "Plugin Opts"
 msgstr "插件参数"
 
-msgid "Before subscribing please click below to delete all servers in the subscription"
-msgstr "订阅前请点击下面的删除所有服务器在订阅"
+msgid "Self-signed Certificate"
+msgstr "自签证书"
 
-msgid "Chnroute Setting"
-msgstr "国内IP段数据库更新设置"
+msgid "If you have a self-signed certificate,please check the box"
+msgstr "如果你使用自签证书，请选择"
 
-msgid "Enable custom chnroute"
-msgstr "启用自定义更新地址"
+msgid "upload"
+msgstr "上传"
 
-msgid "Update url"
-msgstr "更新链接"
+msgid "Upload"
+msgstr "上传"
 
-msgid "HTTP Proxy"
-msgstr "HTTP代理"
+msgid "No specify upload file."
+msgstr "没有上传证书"
 
-msgid "Raw Mode"
-msgstr "模式"
+msgid "Current Certificate Path"
+msgstr "当前证书路径"
 
-msgid "Seq Mode"
-msgstr "Seq模式"
+msgid "Please confirm the current certificate path"
+msgstr "请选择确认所传证书，证书不正确将无法运行"
 
-msgid "Cipher Mode"
-msgstr "加密模式"
+msgid "Subscribe Default Auto-Switch"
+msgstr "订阅新节点自动切换设置"
 
-msgid "Auth Mode"
-msgstr "校验模式"
+msgid "Subscribe new add server default Auto-Switch on"
+msgstr "订阅加入的新节点默认开启自动切换"
 
-msgid "Speeder Mode"
-msgstr "Speeder模式"
+msgid "Open v2ray split-flow"
+msgstr "开启V2ray分流"
 
-msgid "Fec"
-msgstr "fec参数"
+msgid "When open v2ray split-flow,your main server must be a v2ray server"
+msgstr "当使用v2ray分流功能时 主服务器必须为V2ray"
 
-msgid "Mtu"
-msgstr "mtu参数"
+msgid "Youtube Proxy"
+msgstr "Youtube 代理"
 
-msgid "SS Servers"
-msgstr "SS服务器"
+msgid "TaiWan Video Proxy"
+msgstr "台湾视频服务代理"
+
+msgid "Netflix Proxy"
+msgstr "Netflix 代理"
+
+msgid "Diseny+ Proxy"
+msgstr "Diseny+ 代理"
+
+msgid "Prime Video Proxy"
+msgstr "Prime Video 代理"
+
+msgid "Subscription"
+msgstr "订阅管理"
+
+msgid "Node List"
+msgstr "节点列表"
+
+msgid "Apply"
+msgstr "应用"
+
+msgid "total"
+msgstr "总计"
+
+msgid "Nodes"
+msgstr "个节点"
+
+msgid "foreign websites"
+msgstr "国外网站"
+
+msgid "domestic website"
+msgstr "国内网站"
+
+msgid "Problem detected"
+msgstr "无法访问"
+
+msgid "Connection Timeout"
+msgstr "连接超时"
 
 
-msgid "SSR Servers"
-msgstr "SSR服务器"
-
-msgid "SSR Server"
-msgstr "服务端"
-
-msgid "V2 Servers"
-msgstr "V2服务器"
-
-msgid "SS/SSR/V2RAY Server"
-msgstr "SS/SSR/V2RAY 服务端"
-
-msgid "Delete All Subscribe Severs"
-msgstr "删除所有订阅服务器节点"
-
+msgid "Game Mode"
+msgstr "游戏模式"
 
