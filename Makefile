@@ -48,7 +48,7 @@ define Package/$(PKG_NAME)
 	SUBMENU:=3. Applications
 	TITLE:=SS/SSR/V2Ray/Trojan LuCI interface
 	PKGARCH:=all
-	DEPENDS:=+shadowsocksr-libev-alt +ipset +ip-full +iptables-mod-tproxy +dnsmasq-full +coreutils +coreutils-base64 +pdnsd-alt +wget +lua +microsocks +dns2socks \
+	DEPENDS:=+shadowsocksr-libev-alt +ipset +ip-full +iptables-mod-tproxy +dnsmasq-full +coreutils +coreutils-base64 +pdnsd-alt +wget +lua +luasocket +jshn +microsocks +dns2socks \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks:shadowsocks-libev-ss-redir \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_Simple_obfs:simple-obfs \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_V2ray_plugin:v2ray-plugin \
