@@ -170,7 +170,7 @@ endef
 define Package/luci-app-ssr-plus-lean/postinst
 #!/bin/sh
 if [ -z "$${IPKG_INSTROOT}" ]; then
-	( . /etc/uci-defaults/luci-vssr ) && rm -f /etc/uci-defaults/luci-vssr
+	( . /etc/uci-defaults/luci-ssr-plus ) && rm -f /etc/uci-defaults/luci-ssr-plus
 	rm -f /tmp/luci-indexcache
 	chmod 755 /etc/init.d/vssr >/dev/null 2>&1
 	/etc/init.d/vssr enable >/dev/null 2>&1
@@ -181,8 +181,8 @@ endef
 define Package/luci-app-ssr-plus-lean/prerm
 #!/bin/sh
 if [ -z "$${IPKG_INSTROOT}" ]; then
-     /etc/init.d/vssr disable
-     /etc/init.d/vssr stop
+     /etc/init.d/shadowsocksr disable
+     /etc/init.d/shadowsocksr stop
 fi
 exit 0
 endef
