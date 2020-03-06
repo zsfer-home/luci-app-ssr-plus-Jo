@@ -2,61 +2,152 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-ssr-plus-lean
 PKG_VERSION:=163
-PKG_RELEASE:=1
+PKG_RELEASE:=20200306-4
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
+PKG_CONFIG_DEPENDS:= CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_V2ray \
+                 CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_Trojan \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_Kcptun:kcptun \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Server \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_Server \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Socks \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_Socks \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_ipt2socks \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_dnscrypt_proxy \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_dnsforwarder \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_ChinaDNS \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_haproxy \
+                 CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_udpspeeder \
+                 CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_udp2raw-tunnel \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_privoxy \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_simple-obfs \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_simple-obfs-server \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_GoQuiet-client \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_GoQuiet-server \
+                 CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_redsocks2 \
+	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_v2ray-plugin
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/$(PKG_NAME)/config
 config PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks
 	bool "Include Shadowsocks New Version"
-	default y if x86_64
-
-config PACKAGE_$(PKG_NAME)_INCLUDE_Simple_obfs
-	bool "Include Shadowsocks Simple-obfs Plugin"
-	default y if x86_64
-
-config PACKAGE_$(PKG_NAME)_INCLUDE_V2ray_plugin
-	bool "Include Shadowsocks V2ray Plugin"
-	default y if x86_64
-
+	default n
+	
 config PACKAGE_$(PKG_NAME)_INCLUDE_V2ray
 	bool "Include V2ray"
-	default y if x86_64
+	default n
 
 config PACKAGE_$(PKG_NAME)_INCLUDE_Trojan
 	bool "Include Trojan"
-	default y if x86_64
+	default y
 	
-config PACKAGE_$(PKG_NAME)_INCLUDE_Redsocks2
-	bool "Include Redsocks2"
-	default y if x86_64
-
 config PACKAGE_$(PKG_NAME)_INCLUDE_Kcptun
 	bool "Include Kcptun"
 	default n
-
+	
 config PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Server
 	bool "Include ShadowsocksR Server"
-	default y if x86_64
+	default n
+
+config PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_Server
+	bool "Include Shadowsocks Server"
+	default n
+	
+config PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Socks
+	bool "Include ShadowsocksR Socks and Tunnel"
+	default n
+
+config PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_Socks
+	bool "Include Shadowsocks Socks and Tunnel"
+	default n
+	
+config PACKAGE_$(PKG_NAME)_INCLUDE_ipt2socks
+	bool "Include ipt2socks"
+	default n	
+
+config PACKAGE_$(PKG_NAME)_INCLUDE_dnscrypt_proxy
+	bool "Include dnscrypt-proxy-full"
+	default n
+
+config PACKAGE_$(PKG_NAME)_INCLUDE_dnsforwarder
+	bool "Include dnsforwarder"
+	default n
+
+config PACKAGE_$(PKG_NAME)_INCLUDE_ChinaDNS
+	bool "Include chinadns"
+	default n
+
+config PACKAGE_$(PKG_NAME)_INCLUDE_haproxy
+	bool "Include haproxy"
+	default n
+
+config PACKAGE_$(PKG_NAME)_INCLUDE_privoxy
+	bool "Include privoxy http local"
+	default n
+
+config PACKAGE_$(PKG_NAME)_INCLUDE_simple-obfs
+	bool "Include simple-obfsl"
+	default n
+	
+config PACKAGE_$(PKG_NAME)_INCLUDE_simple-obfs-server
+	bool "Include simple-obfs-server"
+	default n
+	
+config PACKAGE_$(PKG_NAME)_INCLUDE_udpspeeder
+	bool "Include udpspeeder"
+	default n
+
+config PACKAGE_$(PKG_NAME)_INCLUDE_udp2raw-tunnel
+	bool "Include udp2raw-tunnel"
+	default n
+	
+config PACKAGE_$(PKG_NAME)_INCLUDE_GoQuiet-client
+	bool "Include GoQuiet-client"
+	default n
+	
+config PACKAGE_$(PKG_NAME)_INCLUDE_GoQuiet-server
+	bool "Include GoQuiet-server"
+	default n
+
+config PACKAGE_$(PKG_NAME)_INCLUDE_v2ray-plugin
+	bool "Include v2ray-plugin"
+	default n
+
+config PACKAGE_$(PKG_NAME)_INCLUDE_redsocks2
+	bool "Include redsocks2"
+	default y 
 endef
 
-define Package/$(PKG_NAME)
-	SECTION:=luci
+define Package/luci-app-ssr-plus-lean
+ 	SECTION:=luci
 	CATEGORY:=LuCI
 	SUBMENU:=3. Applications
-	TITLE:=SS/SSR/V2Ray/Trojan LuCI interface
+	TITLE:=A New SS/SSR/V2Ray/Trojan LuCI interface
 	PKGARCH:=all
-	DEPENDS:=+shadowsocksr-libev-alt +ipset +ip-full +iptables-mod-tproxy +dnsmasq-full +coreutils +coreutils-base64 +pdnsd-alt +wget +lua +luasocket +jshn +microsocks +dns2socks \
-	+PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks:shadowsocks-libev-ss-redir \
-	+PACKAGE_$(PKG_NAME)_INCLUDE_Simple_obfs:simple-obfs \
-	+PACKAGE_$(PKG_NAME)_INCLUDE_V2ray_plugin:v2ray-plugin \
-	+PACKAGE_$(PKG_NAME)_INCLUDE_V2ray:v2ray \
-	+PACKAGE_$(PKG_NAME)_INCLUDE_Trojan:trojan \
-	+PACKAGE_$(PKG_NAME)_INCLUDE_Redsocks2:redsocks2 \
-	+PACKAGE_$(PKG_NAME)_INCLUDE_Kcptun:kcptun-client \
-	+PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Server:shadowsocksr-libev-server
+	DEPENDS:=+shadowsocksr-libev-alt +ipset +ip-full +iptables-mod-tproxy +dnsmasq-full +microsocks +dns2socks +coreutils +coreutils-base64 +bash +pdnsd-alt +wget +luasocket +jshn +lua-cjson +coreutils-nohup +python3-maxminddb +curl \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks:shadowsocks-libev-ss-redir \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_V2ray:v2ray \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_Trojan:trojan \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_Kcptun:kcptun-client \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Server:shadowsocksr-libev-server \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_Server:shadowsocks-libev-ss-server \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Socks:shadowsocksr-libev-ssr-local \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_Socks:shadowsocks-libev-ss-local \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_ipt2socks:ipt2socks \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_dnscrypt_proxy:dnscrypt-proxy-full \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_dnsforwarder:dnsforwarder \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_ChinaDNS:ChinaDNS \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_haproxy:haproxy \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_privoxy:privoxy \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_udpspeeder:udpspeeder \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_udp2raw-tunnel:udp2raw-tunnel \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_simple-obfs:simple-obfs \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_simple-obfs-server:simple-obfs-server \
+             +PACKAGE_$(PKG_NAME)_INCLUDE_redsocks2:redsocks2 \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_GoQuiet-client:gq-client \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_GoQuiet-server:gq-server \
+            +PACKAGE_$(PKG_NAME)_INCLUDE_v2ray-plugin:v2ray-plugin
 endef
 
 define Build/Prepare
@@ -65,79 +156,37 @@ endef
 define Build/Compile
 endef
 
-define Package/$(PKG_NAME)/conffiles
-/etc/china_ssr.txt
-/etc/config/shadowsocksr
-/etc/config/white.list
-/etc/config/black.list
-/etc/dnsmasq.ssr/ad.conf
-/etc/dnsmasq.ssr/gfw_list.conf
-endef
 
-define Package/$(PKG_NAME)/install
-	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_DATA) ./root/etc/china_ssr.txt $(1)/etc/china_ssr.txt
 
-	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_CONF) ./root/etc/config/shadowsocksr $(1)/etc/config/shadowsocksr
-	$(INSTALL_DATA) ./root/etc/config/*.list $(1)/etc/config/
-
-	$(INSTALL_DIR) $(1)/etc/dnsmasq.oversea
-	$(INSTALL_DATA) ./root/etc/dnsmasq.oversea/* $(1)/etc/dnsmasq.oversea/
-
-	$(INSTALL_DIR) $(1)/etc/dnsmasq.ssr
-	$(INSTALL_DATA) ./root/etc/dnsmasq.ssr/* $(1)/etc/dnsmasq.ssr/
-
-	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./root/etc/init.d/* $(1)/etc/init.d/
-
-	$(INSTALL_DIR) $(1)/etc/uci-defaults
-	$(INSTALL_BIN) ./root/etc/uci-defaults/* $(1)/etc/uci-defaults/
-
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) ./root/usr/bin/* $(1)/usr/bin/
-
-	$(INSTALL_DIR) $(1)/usr/share/shadowsocksr
-	$(INSTALL_BIN) ./root/usr/share/shadowsocksr/*.sh $(1)/usr/share/shadowsocksr/
-	$(INSTALL_DATA) ./root/usr/share/shadowsocksr/*.lua $(1)/usr/share/shadowsocksr/
-
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller
-	$(INSTALL_DATA) ./luasrc/controller/*.lua $(1)/usr/lib/lua/luci/controller/
-
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/model/cbi/shadowsocksr
-	$(INSTALL_DATA) ./luasrc/model/cbi/shadowsocksr/*.lua $(1)/usr/lib/lua/luci/model/cbi/shadowsocksr/
-
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/view/shadowsocksr
-	$(INSTALL_DATA) ./luasrc/view/shadowsocksr/* $(1)/usr/lib/lua/luci/view/shadowsocksr/
-
+define Package/luci-app-ssr-plus-lean/install
+	$(INSTALL_DIR) $(1)/usr/lib/lua/luci
+	cp -pR ./luasrc/* $(1)/usr/lib/lua/luci
+	$(INSTALL_DIR) $(1)/
+	cp -pR ./root/* $(1)/
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
 	po2lmo ./po/zh-cn/ssr-plus.po $(1)/usr/lib/lua/luci/i18n/ssr-plus.zh-cn.lmo
 endef
 
-define Package/$(PKG_NAME)/postinst
+define Package/luci-app-ssr-plus-lean/postinst
 #!/bin/sh
 if [ -z "$${IPKG_INSTROOT}" ]; then
-	( . /etc/uci-defaults/luci-ssr-plus ) && rm -f /etc/uci-defaults/luci-ssr-plus
+	( . /etc/uci-defaults/luci-vssr ) && rm -f /etc/uci-defaults/luci-vssr
 	rm -f /tmp/luci-indexcache
-	/etc/init.d/shadowsocksr enable >/dev/null 2>&1
+	chmod 755 /etc/init.d/vssr >/dev/null 2>&1
+	/etc/init.d/vssr enable >/dev/null 2>&1
 fi
 exit 0
 endef
 
-define Package/$(PKG_NAME)/prerm
+define Package/luci-app-ssr-plus-lean/prerm
 #!/bin/sh
 if [ -z "$${IPKG_INSTROOT}" ]; then
-	/etc/init.d/shadowsocksr disable
-	/etc/init.d/shadowsocksr stop
+     /etc/init.d/vssr disable
+     /etc/init.d/vssr stop
 fi
 exit 0
 endef
 
-define Package/$(PKG_NAME)/postrm
-#!/bin/sh
-rm -rf /etc/china_ssr.txt /etc/dnsmasq.ssr /etc/dnsmasq.oversea /etc/config/shadowsocksr /etc/config/black.list \
-		/etc/config/gfw.list /etc/config/white.list >/dev/null 2>&1
-exit 0
-endef
+$(eval $(call BuildPackage,luci-app-ssr-plus-lean))
 
-$(eval $(call BuildPackage,$(PKG_NAME)))
+
